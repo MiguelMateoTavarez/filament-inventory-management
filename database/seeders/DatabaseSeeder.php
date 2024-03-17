@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +13,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@filament.test',
+            'is_customer' => false,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'Client 1',
+            'email' => 'customer1@filament.test',
+            'is_customer' => true,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Client 2',
+            'email' => 'customer2@filament.test',
+            'is_customer' => true,
+        ]);
+
+        $this->call([
+            CategorySeeder::class
+        ]);
     }
 }
